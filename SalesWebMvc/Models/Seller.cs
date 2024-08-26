@@ -7,6 +7,8 @@
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
         public double BaseSalary { get; set; }
+        // Tornar a chave estrangeira opcional
+        public int? DepartmentId { get; set; }
         public Department Department { get; set; }
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 
