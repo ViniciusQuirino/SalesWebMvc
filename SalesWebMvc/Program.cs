@@ -9,18 +9,24 @@ builder.Services.AddDbContext<SalesWebMvcContext>(options =>
         ?? throw new InvalidOperationException("Connection string 'SalesWebMvcContext' not found.");
 
     var serverVersion = new MySqlServerVersion(new Version(8, 0, 39));
-   
+
     options.UseMySql(connectionString, serverVersion, mySqlOptions =>
     {
         mySqlOptions.MigrationsAssembly("SalesWebMvc");
     });
 });
 
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<SeedingService>(); //Registra o serviço no sistema da injeção de dependencias da aplicação
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
+    seedingService.Seed();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
