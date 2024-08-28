@@ -19,6 +19,7 @@ namespace SalesWebMvc.Services
 
         public void Insert(Seller obj)
         {
+            Console.WriteLine(obj);
             _context.Add(obj);
             _context.SaveChanges();
         }
