@@ -1,4 +1,8 @@
-﻿namespace SalesWebMvc.Models
+﻿using SalesWebMvc.Services.Exceptions;
+using Microsoft.AspNetCore.Mvc;
+using SalesWebMvc.Models.ViewModels;
+
+namespace SalesWebMvc.Models
 {
     public class Seller
     {
@@ -43,5 +47,8 @@
         {
             return Sales.Where(sr => sr.Date >= initial && sr.Date <= final).Sum(sr => sr.Amount);
         }
+
+       
+ 
     }
 }
